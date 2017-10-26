@@ -1,11 +1,11 @@
-# enumerated
+# Enumerated
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis]
-[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
-[![Quality Score][ico-code-quality]][link-code-quality]
-[![Total Downloads][ico-downloads]][link-downloads]
+[![Author](http://img.shields.io/badge/author-@dbonner1987-blue.svg?style=flat-square)](https://twitter.com/dbonner1987)
+[![Build Status](https://img.shields.io/travis/davidianbonner/enumerated/master.svg?style=flat-square)](https://travis-ci.org/davidianbonner/enumerated)
+[![Quality Score](https://img.shields.io/scrutinizer/g/davidianbonner/enumerated.svg?style=flat-square)](https://scrutinizer-ci.com/g/davidianbonner/enumerated)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+[![Packagist Version](https://img.shields.io/packagist/v/davidianbonner/enumerated.svg?style=flat-square)](https://packagist.org/packages/davidianbonner/enumerated)
+[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/davidianbonner/enumerated.svg?style=flat-square)](https://scrutinizer-ci.com/g/davidianbonner/enumerated/code-structure)
 
 An enumerated type (Enum) is a data type that consists of a set of predefined values. This can be useful for ensuring data consistency. The Enumerated package provides a simple base class for creating enumerated types allowing the devloper to define values statically.
 
