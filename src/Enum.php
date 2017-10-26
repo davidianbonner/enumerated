@@ -29,7 +29,7 @@ class Enum
     /**
      * Return the enumerators values.
      *
-     * @param boolean $keys
+     * @param bool $keys
      * @return array
      */
     public static function allValues($keys = false) : array
@@ -46,7 +46,7 @@ class Enum
     /**
      * Return a collection of the declared values.
      *
-     * @param  boolean $keys
+     * @param  bool $keys
      * @return Illuminate\Support\Collection
      */
     public static function collect($keys = false) : Collection
@@ -100,10 +100,10 @@ class Enum
     }
 
     /**
-     * Check the value is valid and return a boolean.
+     * Check the value is valid and return a bool.
      *
      * @param  string  $value
-     * @return boolean
+     * @return bool
      */
     public static function isValid($value) : bool
     {
