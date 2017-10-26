@@ -44,7 +44,7 @@ $codebase->language = config('language.php');
 // or
 
 foreach (config('language') as $language) {
-    '<option value="'.$language.'">'.$language.'</option>';
+    echo '<option value="'.$language.'">'.$language.'</option>';
 }
 ```
 
@@ -79,7 +79,7 @@ $codebase->language = Language::ofType($type)->value();
 // or
 
 foreach (Language::allValues() as $language) {
-    '<option value="'.$language.'">'.$language.'</option>';
+    echo '<option value="'.$language.'">'.$language.'</option>';
 }
 ```
 
