@@ -88,13 +88,13 @@ class Enum
     /**
      * Validate the value.
      *
-     * @param  string $value
+     * @param  mixed $value
      * @throws DavidIanBonner\Enumerated\EnumNotValidException
      * @return void
      */
     public static function validateValue($value)
     {
-        if (! is_string($value) || ! in_array($value, static::allValues())) {
+        if (! in_array($value, static::allValues())) {
             throw new EnumNotValidException("The value [{$value}] is not a valid type.");
         }
     }
@@ -102,7 +102,7 @@ class Enum
     /**
      * Check the value is valid and return a bool.
      *
-     * @param  string  $value
+     * @param  mixed  $value
      * @return bool
      */
     public static function isValid($value) : bool
