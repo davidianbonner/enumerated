@@ -60,7 +60,7 @@ class Enum
      * @param  string $value
      * @return DavidIanBonner\Enumerated\Enum
      */
-    public static function ofType($value) : Enum
+    public static function ofType($value) : self
     {
         $key = get_called_class().':'.$value;
 
