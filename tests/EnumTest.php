@@ -3,6 +3,7 @@
 namespace DavidIanBonner\Enumerated;
 
 use DavidIanBonner\Enumerated\EnumNotValidException;
+use DavidIanBonner\Enumerated\Stubs\Consoles;
 use DavidIanBonner\Enumerated\Stubs\Editor;
 use DavidIanBonner\Enumerated\Stubs\Language;
 use Illuminate\Support\Collection;
@@ -153,5 +154,22 @@ class EnumTest extends TestCase
             'html' => 'html',
             'python' => 'python',
         ], Language::toSelect());
+    }
+
+    /** @test */
+    function it_can_return_package_list()
+    {
+        Consoles::collect()->each(function ($console) {
+            Lang::shouldReceive('get')
+                ->once()
+                ->with('package::enum.consoles.' . $console)
+                ->andReturn($console);
+        });
+
+        $this->assertEquals([
+            'playstation 4' => 'playstation 4',
+            'xbox one' => 'xbox one',
+            'nintendo switch' => 'nintendo switch',
+        ], Consoles::toSelect());
     }
 }

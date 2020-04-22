@@ -18,6 +18,8 @@ abstract class Enum
     /** @var array */
     protected static $values = [];
 
+    abstract public function langKey(): string;
+
     /**
      * @param string $value
      */
@@ -148,16 +150,17 @@ abstract class Enum
      */
     public function line(): string
     {
-        $vendor = $this->vendor() ?: null;
-
         return Lang::get(
-            ($vendor ? $vendor.'::' : '').'enum.'.$this->langKey().'.'.str_replace('_', '-', $this->value())
+            implode('.', [
+                ($this->langKeyPrefix() ? $this->langKeyPrefix() . '::' : '') . 'enum',
+                $this->langKey(),
+                str_replace('_', '-', $this->value())
+            ])
         );
     }
 
-    abstract public function langKey(): string;
-
-    public function vendor()
+    public function langKeyPrefix(): ?string
     {
+        return null;
     }
 }
