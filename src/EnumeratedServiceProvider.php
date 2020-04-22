@@ -14,7 +14,7 @@ class EnumeratedServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/enum.php' => resource_path('lang/en/enum.php'),
+            __DIR__.'/../config/enum.php' => resource_path('lang/en/enum.php'),
         ]);
     }
 }
