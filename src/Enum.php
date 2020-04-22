@@ -155,8 +155,10 @@ abstract class Enum
         );
     }
 
-    public abstract function langKey(): string;
+    abstract public function langKey(): string;
 
     public function vendor()
-    {}
+    {
+
+    }
 }
