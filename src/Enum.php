@@ -137,6 +137,7 @@ class Enum
         return Collection::make(static::allValues())
             ->mapWithKeys(function ($key) {
                 $outcome = self::ofType($key);
+
                 return [$outcome->value() => $outcome->line()];
             })
             ->toArray();
