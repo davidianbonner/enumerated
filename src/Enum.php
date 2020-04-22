@@ -95,7 +95,7 @@ class Enum
      */
     public static function validateValue($value)
     {
-        if (!in_array($value, static::allValues())) {
+        if (! in_array($value, static::allValues())) {
             throw new EnumNotValidException("The value [{$value}] is not a valid type.");
         }
     }
