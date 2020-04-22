@@ -17,6 +17,6 @@ class Consoles extends Enum
 
     public function langKeyPrefix(): string
     {
-        return 'package';
+        return 'package::';
     }
 }

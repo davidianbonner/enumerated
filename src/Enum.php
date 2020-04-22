@@ -39,7 +39,7 @@ abstract class Enum
     {
         $caller = get_called_class();
 
-        if (! isset(static::$values[$caller])) {
+        if (!isset(static::$values[$caller])) {
             static::$values[$caller] = static::getDeclaredConstants();
         }
 
@@ -65,9 +65,9 @@ abstract class Enum
      */
     public static function ofType($value): self
     {
-        $key = get_called_class().':'.$value;
+        $key = get_called_class() . ':' . $value;
 
-        if (! isset(self::$loaded[$key])) {
+        if (!isset(self::$loaded[$key])) {
             self::$loaded[$key] = new static($value);
         }
 
@@ -97,7 +97,7 @@ abstract class Enum
      */
     public static function validateValue($value)
     {
-        if (! in_array($value, static::allValues())) {
+        if (!in_array($value, static::allValues())) {
             throw new EnumNotValidException("The value [{$value}] is not a valid type.");
         }
     }
@@ -152,7 +152,7 @@ abstract class Enum
     {
         return Lang::get(
             implode('.', [
-                ($this->langKeyPrefix() ? $this->langKeyPrefix().'::' : '').'enum',
+                $this->langKeyPrefix() . 'enum',
                 $this->langKey(),
                 str_replace('_', '-', $this->value()),
             ])
