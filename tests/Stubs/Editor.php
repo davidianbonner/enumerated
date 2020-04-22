@@ -10,5 +10,8 @@ class Editor extends Enum
     const SUBLIME = 'sublime text 3';
     const VIM = 'vim';
 
-    protected $langKey = 'editor';
+    public function langKey(): string
+    {
+        return 'editor';
+    }
 }

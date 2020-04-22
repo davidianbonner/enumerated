@@ -13,5 +13,8 @@ class Language extends Enum
     const HTML = 'html';
     const PYTHON = 'python';
 
-    protected $langKey = 'language';
+    public function langKey(): string
+    {
+        return 'language';
+    }
 }

@@ -131,7 +131,7 @@ class EnumTest extends TestCase
     /** @test */
     function it_can_return_line_for_an_item()
     {
-        Lang::shouldReceive('get')->once()->with('app.enum.language.php')->andReturn('PHP');
+        Lang::shouldReceive('get')->once()->with('enum.language.php')->andReturn('PHP');
 
         $line = Language::ofType(Language::PHP)->line();
 
@@ -142,7 +142,7 @@ class EnumTest extends TestCase
     function it_can_return_list_for_select()
     {
         Language::collect()->each(function ($lang) {
-            Lang::shouldReceive('get')->once()->with('app.enum.language.' . $lang)->andReturn($lang);
+            Lang::shouldReceive('get')->once()->with('enum.language.' . $lang)->andReturn($lang);
         });
 
         $this->assertEquals([

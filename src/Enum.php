@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Lang;
 use ReflectionClass;
 
-class Enum
+abstract class Enum
 {
     /** @var string */
     private $value;
@@ -134,7 +134,7 @@ class Enum
      */
     public static function toSelect(): array
     {
-        return Collection::make(static::allValues())
+        return static::collect()
             ->mapWithKeys(function ($key) {
                 $outcome = self::ofType($key);
 
@@ -149,7 +149,9 @@ class Enum
     public function line(): string
     {
         return Lang::get(
-            'app.enum.'.$this->langKey.'.'.str_replace('_', '-', $this->value())
+            'enum.'.$this->langKey().'.'.str_replace('_', '-', $this->value())
         );
     }
+
+    public abstract function langKey(): string;
 }
