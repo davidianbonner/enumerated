@@ -37,7 +37,7 @@ class Enum
     {
         $caller = get_called_class();
 
-        if (!isset(static::$values[$caller])) {
+        if (! isset(static::$values[$caller])) {
             static::$values[$caller] = static::getDeclaredConstants();
         }
 
@@ -63,9 +63,9 @@ class Enum
      */
     public static function ofType($value): self
     {
-        $key = get_called_class() . ':' . $value;
+        $key = get_called_class().':'.$value;
 
-        if (!isset(self::$loaded[$key])) {
+        if (! isset(self::$loaded[$key])) {
             self::$loaded[$key] = new static($value);
         }
 
@@ -148,7 +148,7 @@ class Enum
     public function line(): string
     {
         return Lang::get(
-            'app.enum.' . $this->langKey . '.' . str_replace('_', '-', $this->value())
+            'app.enum.'.$this->langKey.'.'.str_replace('_', '-', $this->value())
         );
     }
 }
