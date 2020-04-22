@@ -152,9 +152,9 @@ abstract class Enum
     {
         return Lang::get(
             implode('.', [
-                ($this->langKeyPrefix() ? $this->langKeyPrefix() . '::' : '') . 'enum',
+                ($this->langKeyPrefix() ? $this->langKeyPrefix().'::' : '') . 'enum',
                 $this->langKey(),
-                str_replace('_', '-', $this->value())
+                str_replace('_', '-', $this->value()),
             ])
         );
     }
