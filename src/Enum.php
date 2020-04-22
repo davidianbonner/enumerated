@@ -159,6 +159,5 @@ abstract class Enum
 
     public function vendor()
     {
-
     }
 }
