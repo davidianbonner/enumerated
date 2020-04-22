@@ -63,7 +63,7 @@ abstract class Enum
      */
     public static function ofType($value): self
     {
-        $key = get_called_class().':'.$value;
+        $key = get_called_class() . ':' . $value;
 
         if (! isset(self::$loaded[$key])) {
             self::$loaded[$key] = new static($value);
@@ -148,10 +148,17 @@ abstract class Enum
      */
     public function line(): string
     {
+        $vendor = $this->vendor() ?: null;
+
         return Lang::get(
-            'enum.'.$this->langKey().'.'.str_replace('_', '-', $this->value())
+            ($vendor?$vendor.'::':'').'enum.'.$this->langKey().'.'.str_replace('_', '-', $this->value())
         );
     }
 
     public abstract function langKey(): string;
+
+    public function vendor()
+    {
+        return null;
+    }
 }
