@@ -159,8 +159,8 @@ abstract class Enum
         );
     }
 
-    public function langKeyPrefix(): ?string
+    public function langKeyPrefix(): string
     {
-        return null;
+        return '';
     }
 }
