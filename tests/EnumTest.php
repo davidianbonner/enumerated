@@ -157,7 +157,7 @@ class EnumTest extends TestCase
     }
 
     /** @test */
-    function it_can_return_package_list()
+    function it_can_prefix_the_lang_line()
     {
         Consoles::collect()->each(function ($console) {
             Lang::shouldReceive('get')
