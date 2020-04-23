@@ -2,11 +2,13 @@
 
 namespace DavidIanBonner\Enumerated;
 
-use Mockery;
-use Illuminate\Support\Collection;
+use DavidIanBonner\Enumerated\EnumNotValidException;
+use DavidIanBonner\Enumerated\Stubs\Consoles;
 use DavidIanBonner\Enumerated\Stubs\Editor;
 use DavidIanBonner\Enumerated\Stubs\Language;
-use DavidIanBonner\Enumerated\EnumNotValidException;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Lang;
+use Mockery;
 
 class EnumTest extends TestCase
 {
@@ -125,5 +127,49 @@ class EnumTest extends TestCase
         $this->assertEquals([
             'visual studio code', 'sublime text 3', 'vim',
         ], $editor->all());
+    }
+
+    /** @test */
+    function it_can_return_line_for_an_item()
+    {
+        Lang::shouldReceive('get')->once()->with('enum.language.php')->andReturn('PHP');
+
+        $line = Language::ofType(Language::PHP)->line();
+
+        $this->assertEquals($line, 'PHP');
+    }
+
+    /** @test */
+    function it_can_return_list_for_select()
+    {
+        Language::collect()->each(function ($lang) {
+            Lang::shouldReceive('get')->once()->with('enum.language.' . $lang)->andReturn($lang);
+        });
+
+        $this->assertEquals([
+            'php' => 'php',
+            'javascript' => 'javascript',
+            'css' => 'css',
+            'go' => 'go',
+            'html' => 'html',
+            'python' => 'python',
+        ], Language::toSelect());
+    }
+
+    /** @test */
+    function it_can_prefix_the_lang_line()
+    {
+        Consoles::collect()->each(function ($console) {
+            Lang::shouldReceive('get')
+                ->once()
+                ->with('package::enum.consoles.' . $console)
+                ->andReturn($console);
+        });
+
+        $this->assertEquals([
+            'playstation 4' => 'playstation 4',
+            'xbox one' => 'xbox one',
+            'nintendo switch' => 'nintendo switch',
+        ], Consoles::toSelect());
     }
 }

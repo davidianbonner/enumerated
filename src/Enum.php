@@ -3,10 +3,11 @@
 namespace DavidIanBonner\Enumerated;
 
 use Exception;
-use ReflectionClass;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Lang;
+use ReflectionClass;
 
-class Enum
+abstract class Enum
 {
     /** @var string */
     private $value;
@@ -16,6 +17,8 @@ class Enum
 
     /** @var array */
     protected static $values = [];
+
+    abstract public function langKey(): string;
 
     /**
      * @param string $value
@@ -32,11 +35,11 @@ class Enum
      * @param bool $keys
      * @return array
      */
-    public static function allValues($keys = false) : array
+    public static function allValues($keys = false): array
     {
         $caller = get_called_class();
 
-        if (! isset(static::$values[$caller])) {
+        if (!isset(static::$values[$caller])) {
             static::$values[$caller] = static::getDeclaredConstants();
         }
 
@@ -49,7 +52,7 @@ class Enum
      * @param  bool $keys
      * @return Illuminate\Support\Collection
      */
-    public static function collect($keys = false) : Collection
+    public static function collect($keys = false): Collection
     {
         return Collection::make(static::allValues($keys));
     }
@@ -60,11 +63,11 @@ class Enum
      * @param  string $value
      * @return DavidIanBonner\Enumerated\Enum
      */
-    public static function ofType($value) : self
+    public static function ofType($value): self
     {
-        $key = get_called_class().':'.$value;
+        $key = get_called_class() . ':' . $value;
 
-        if (! isset(self::$loaded[$key])) {
+        if (!isset(self::$loaded[$key])) {
             self::$loaded[$key] = new static($value);
         }
 
@@ -80,7 +83,7 @@ class Enum
      *
      * @return string
      */
-    public function value() : string
+    public function value(): string
     {
         return $this->value;
     }
@@ -94,7 +97,7 @@ class Enum
      */
     public static function validateValue($value)
     {
-        if (! in_array($value, static::allValues())) {
+        if (!in_array($value, static::allValues())) {
             throw new EnumNotValidException("The value [{$value}] is not a valid type.");
         }
     }
@@ -105,7 +108,7 @@ class Enum
      * @param  mixed  $value
      * @return bool
      */
-    public static function isValid($value) : bool
+    public static function isValid($value): bool
     {
         try {
             static::validateValue($value);
@@ -121,10 +124,43 @@ class Enum
      *
      * @return array
      */
-    protected static function getDeclaredConstants() : array
+    protected static function getDeclaredConstants(): array
     {
         $reflection = new ReflectionClass(get_called_class());
 
         return (array) $reflection->getConstants();
+    }
+
+    /**
+     * @return array
+     */
+    public static function toSelect(): array
+    {
+        return static::collect()
+            ->mapWithKeys(function ($key) {
+                $outcome = self::ofType($key);
+
+                return [$outcome->value() => $outcome->line()];
+            })
+            ->toArray();
+    }
+
+    /**
+     * @return string
+     */
+    public function line(): string
+    {
+        return Lang::get(
+            implode('.', [
+                $this->langKeyPrefix() . 'enum',
+                $this->langKey(),
+                str_replace('_', '-', $this->value()),
+            ])
+        );
+    }
+
+    public function langKeyPrefix(): string
+    {
+        return '';
     }
 }

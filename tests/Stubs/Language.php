@@ -12,4 +12,9 @@ class Language extends Enum
     const GO = 'go';
     const HTML = 'html';
     const PYTHON = 'python';
+
+    public function langKey(): string
+    {
+        return 'language';
+    }
 }
