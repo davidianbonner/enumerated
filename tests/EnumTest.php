@@ -2,16 +2,38 @@
 
 namespace DavidIanBonner\Enumerated;
 
+use DavidIanBonner\Enumerated\EnumeratedServiceProvider;
 use DavidIanBonner\Enumerated\EnumNotValidException;
 use DavidIanBonner\Enumerated\Stubs\Consoles;
 use DavidIanBonner\Enumerated\Stubs\Editor;
 use DavidIanBonner\Enumerated\Stubs\Language;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Lang;
 use Mockery;
 
 class EnumTest extends TestCase
 {
+    protected $application_mock;
+
+    protected $service_provider;
+
+    protected function setUp(): void
+    {
+        $this->setUpMocks();
+
+        $this->service_provider = new EnumeratedServiceProvider($this->application_mock);
+
+        $this->service_provider->register();
+
+        parent::setUp();
+    }
+
+    protected function setUpMocks()
+    {
+        $this->application_mock = Mockery::mock(Application::class);
+    }
+
     /** @test */
     function it_only_performs_constant_reflection_once_and_caches_the_values()
     {
@@ -171,5 +193,23 @@ class EnumTest extends TestCase
             'xbox one' => 'xbox one',
             'nintendo switch' => 'nintendo switch',
         ], Consoles::toSelect());
+    }
+
+    /** @test */
+    function it_can_assert_it_is_an_enum()
+    {
+        $console = Consoles::NINTENDO_SWITCH;
+
+        $consoleEnum = enum_if($console, Consoles::class);
+
+        $this->assertInstanceOf(Consoles::class, $consoleEnum);
+    }
+
+    /** @test */
+    function it__will_return_null_if_not_enum()
+    {
+        $consoleEnum = enum_if(null, Consoles::class);
+
+        $this->assertNull($consoleEnum);
     }
 }
