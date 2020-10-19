@@ -13,12 +13,10 @@ class EnumeratedServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        include_once __DIR__ . 'helpers.php';
+
         $this->publishes([
             __DIR__ . '/../lang/enum.php' => resource_path('lang/en/enum.php'),
-        ]);
-
-        $this->register([
-            include_once __DIR__ . 'helpers.php',
         ]);
     }
 }
