@@ -154,7 +154,7 @@ abstract class Enum
             implode('.', [
                 $this->langKeyPrefix() . 'enum',
                 $this->langKey(),
-                str_replace('_', '-', $this->value()),
+                $this->value(),
             ])
         );
     }
