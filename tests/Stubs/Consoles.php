@@ -2,20 +2,23 @@
 
 namespace DavidIanBonner\Enumerated\Stubs;
 
-use DavidIanBonner\Enumerated\Enum;
+use DavidIanBonner\Enumerated\Enumerated;
+use DavidIanBonner\Enumerated\HasEnumeration;
 
-class Consoles extends Enum
+enum Consoles: string implements Enumerated
 {
-    const PLAYSTATION_4 = 'playstation 4';
-    const XBOX_ONE = 'xbox one';
-    const NINTENDO_SWITCH = 'nintendo switch';
+    use HasEnumeration;
 
-    public function langKey(): string
+    case PLAYSTATION_4 = 'playstation 4';
+    case XBOX_ONE = 'xbox one';
+    case NINTENDO_SWITCH = 'nintendo switch';
+
+    public static function key(): string
     {
         return 'consoles';
     }
 
-    public function langKeyPrefix(): string
+    public static function keyPrefix(): string
     {
         return 'package::';
     }
