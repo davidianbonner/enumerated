@@ -28,7 +28,7 @@ trait HasEnumeration
     {
         return Lang::get(
             implode('.', [
-                $this->keyPrefix() . 'enum',
+                $this->keyPrefix().'enum',
                 static::key(),
                 $this->value,
             ])
