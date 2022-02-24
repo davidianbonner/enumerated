@@ -2,18 +2,21 @@
 
 namespace DavidIanBonner\Enumerated\Stubs;
 
-use DavidIanBonner\Enumerated\Enum;
+use DavidIanBonner\Enumerated\Enumerated;
+use DavidIanBonner\Enumerated\HasEnumeration;
 
-class Language extends Enum
+enum Language: string implements Enumerated
 {
-    const PHP = 'php';
-    const JS = 'javascript';
-    const CSS = 'css';
-    const GO = 'go';
-    const HTML = 'html';
-    const PYTHON = 'python';
+    use HasEnumeration;
 
-    public function langKey(): string
+    case PHP = 'php';
+    case JS = 'javascript';
+    case CSS = 'css';
+    case GO = 'go';
+    case HTML = 'html';
+    case PYTHON = 'python';
+
+    public static function key(): string
     {
         return 'language';
     }
