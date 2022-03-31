@@ -6,6 +6,7 @@ use DavidIanBonner\Enumerated\Stubs\Consoles;
 use DavidIanBonner\Enumerated\Stubs\Language;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Lang;
+use SebastianBergmann\Environment\Console;
 
 class EnumTest extends TestCase
 {
@@ -85,5 +86,17 @@ class EnumTest extends TestCase
             'xbox one' => 'xbox one',
             'nintendo switch' => 'nintendo switch',
         ], Consoles::toSelect()->toArray());
+    }
+
+    /** @test */
+    function it_will_return_true_if_enum_is_exists()
+    {
+        $this->assertTrue(Consoles::exists('playstation 4'));
+    }
+
+    /** @test */
+    function it_will_return_false_if_enum_value_doesnot_exist()
+    {
+        $this->assertFalse(Consoles::exists('playstation 360'));
     }
 }

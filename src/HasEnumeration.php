@@ -24,11 +24,16 @@ trait HasEnumeration
         ]);
     }
 
+    public static function exists($value): bool
+    {
+        return (bool) optional(static::tryFrom($value))->value;
+    }
+
     public function line(): string
     {
         return Lang::get(
             implode('.', [
-                $this->keyPrefix().'enum',
+                $this->keyPrefix() . 'enum',
                 static::key(),
                 $this->value,
             ])
