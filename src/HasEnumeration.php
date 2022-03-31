@@ -24,6 +24,11 @@ trait HasEnumeration
         ]);
     }
 
+    public static function exists($value): bool
+    {
+        return (bool) optional(static::tryFrom($value))->value;
+    }
+
     public function line(): string
     {
         return Lang::get(
